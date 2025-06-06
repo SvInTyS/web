@@ -3,16 +3,15 @@ package auth;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class RegisterServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/web/WEB-INF/users.db"; // Проверь путь к БД
+    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/web/WEB-INF/users.db";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,14 +28,24 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
 
-            try (Connection conn = DriverManager.getConnection(DB_URL);
-                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO users(username, password) VALUES (?, ?)")) {
+            try (Connection conn = DriverManager.getConnection(DB_URL)) {
 
-                stmt.setString(1, username);
-                stmt.setString(2, password); // Пока без шифрования
+                PreparedStatement checkStmt = conn.prepareStatement("SELECT * FROM users WHERE username = ?");
+                checkStmt.setString(1, username);
+                ResultSet rs = checkStmt.executeQuery();
 
-                stmt.executeUpdate();
+                if (rs.next()) {
+                    out.println("Пользователь с таким логином уже существует!");
+                    return;
+                }
+
+                PreparedStatement insertStmt = conn.prepareStatement("INSERT INTO users(username, password) VALUES (?, ?)");
+                insertStmt.setString(1, username);
+                insertStmt.setString(2, password);
+
+                insertStmt.executeUpdate();
                 out.println("Пользователь зарегистрирован!");
+
             } catch (SQLException e) {
                 out.println("Ошибка базы данных: " + e.getMessage());
             }
