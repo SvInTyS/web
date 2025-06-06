@@ -1,12 +1,9 @@
 package auth;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.*;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 public class LoginServlet extends HttpServlet {
 
@@ -16,30 +13,27 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        try (PrintWriter out = response.getWriter()) {
-            try (Connection conn = DriverManager.getConnection(DB_URL);
-                 PreparedStatement stmt = conn.prepareStatement(
-                         "SELECT * FROM users WHERE username = ? AND password = ?")) {
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement(
+                     "SELECT * FROM users WHERE username = ? AND password = ?")) {
 
-                stmt.setString(1, username);
-                stmt.setString(2, password);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
 
-                ResultSet rs = stmt.executeQuery();
+            ResultSet rs = stmt.executeQuery();
 
-                if (rs.next()) {
-                    out.println("Успешный вход! Добро пожаловать, " + username);
-                } else {
-                    out.println("Неверный логин или пароль.");
-                }
+            if (rs.next()) {
+                // 1. Создание сессии
+                HttpSession session = request.getSession();
+                session.setAttribute("username", username);
 
-            } catch (SQLException e) {
-                out.println("Ошибка базы данных: " + e.getMessage());
-            }
-        }
-    }
-}
+                // 2. Получаем роль из БД (или по умолчанию "user")
+                String role = rs.getString("role");
+                session.setAttribute("role", role != null ? role : "user");
+
+                // 3. Перенаправляем на каталог или главную
+                respo
