@@ -27,4 +27,30 @@ MyWebApp/
 ├── WEB-INF/
 │   └── web.xml         # Тут регистрируем сервлеты
 ├── lib/
-│   └── sqlite-jdbc.jar # Сюда положим SQLite драйвер
+│   ├── sqlite-jdbc.jar # Сюда положим SQLite драйвер
+    └── javax.servlet-api-4.0.1.jar
+
+cd C:\Users\svint\Desktop\vuzik\apache-tomcat-9.0.105\bin
+startup.bat
+shutdown.bat
+http://localhost:8080/WebApp/register.jsp
+
+## Меняем структуру, для нормальной компиляции
+```plaintext
+MyWebApp/
+├── src/                    # Исходники Java
+│   └── auth/
+│       ├── LoginServlet.java
+│       └── RegisterServlet.java
+├── lib/                    # JAR-библиотеки
+│   ├── javax.servlet-api-4.0.1.jar
+│   └── sqlite-jdbc.jar
+├── build/                  # Куда компилируются .class-файлы
+├── web/                    # HTML/JSP + WEB-INF
+│   ├── index.jsp
+│   ├── login.jsp
+│   ├── register.jsp
+│   └── WEB-INF/
+│       ├── web.xml
+│       ├── classes/       # Сюда мы копируем build-результаты
+│       └── lib/           # Сюда пойдут JAR’ы при создании WAR
