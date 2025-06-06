@@ -52,5 +52,11 @@ MyWebApp/
 │   ├── register.jsp
 │   └── WEB-INF/
 │       ├── web.xml
-│       ├── classes/       # Сюда мы копируем build-результаты
+│       ├── classes/       # Сюда мы копируем build-результаты 
 │       └── lib/           # Сюда пойдут JAR’ы при создании WAR
+
+Копирование .class в WEB-INF/classes/:
+xcopy /s /y build\* web\WEB-INF\classes\
+
+Копирование JAR-файлов в WEB-INF/lib/:
+xcopy /y lib\*.jar web\WEB-INF\lib\

@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Регистрация</h2>
-    <form method="post" action="register">
+    <form method="post" action="${pageContext.request.contextPath}/register">
         Логин: <input type="text" name="username"><br>
         Пароль: <input type="password" name="password"><br>
         <input type="submit" value="Зарегистрироваться">
