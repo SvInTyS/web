@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.util.List" %>
+<%@ page import="catalog.CatalogServlet.Item" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,28 +8,28 @@
     <title>Каталог</title>
 </head>
 <body>
+<h2>Каталог товаров</h2>
 
 <%
-    HttpSession session = request.getSession(false);
-    String username = (session != null) ? (String) session.getAttribute("username") : null;
-    String role = (session != null) ? (String) session.getAttribute("role") : null;
-
-    if (username != null) {
+    List<Item> items = (List<Item>) request.getAttribute("items");
+    if (items != null) {
+        for (Item item : items) {
 %>
-    <p>Вы вошли как: <strong><%= username %></strong> (<%= role %>)</p>
-    <form action="logout" method="post">
-        <input type="submit" value="Выйти">
-    </form>
+            <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+                <h3><%= item.name %></h3>
+                <p><%= item.description %></p>
+                <p>Цена: <strong><%= item.price %></strong> руб.</p>
+                <img src="<%= item.image %>" alt="Товар" width="200"><br>
+                <a href="item.jsp?id=<%= item.id %>">Подробнее</a>
+            </div>
 <%
+        }
     } else {
 %>
-    <p>Вы не авторизованы. <a href="login.jsp">Войти</a></p>
+    <p>Нет товаров для отображения.</p>
 <%
     }
 %>
-<hr>
-
-<!-- Каталог можно вывести здесь -->
 
 </body>
 </html>

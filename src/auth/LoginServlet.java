@@ -36,4 +36,15 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("role", role != null ? role : "user");
 
                 // 3. Перенаправляем на каталог или главную
-                respo
+                response.sendRedirect("catalog.jsp"); // или другой путь
+            } else {
+                // Неверные данные
+                response.setContentType("text/html; charset=UTF-8");
+                response.getWriter().println("Неверный логин или пароль. <a href='login.jsp'>Назад</a>");
+            }
+
+        } catch (SQLException e) {
+            throw new ServletException("Ошибка при подключении к базе данных", e);
+        }
+    }
+}
