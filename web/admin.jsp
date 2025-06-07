@@ -16,6 +16,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <title>Админ-панель</title>
 </head>
 <body>

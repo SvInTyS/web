@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <title>Регистрация</title>
 </head>
 <body>
