@@ -1,7 +1,5 @@
 package admin;
 
-import catalog.CatalogServlet.Item;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
