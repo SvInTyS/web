@@ -30,10 +30,6 @@ MyWebApp/
 │   ├── sqlite-jdbc.jar # Сюда положим SQLite драйвер
     └── javax.servlet-api-4.0.1.jar
 
-cd C:\Users\svint\Desktop\vuzik\apache-tomcat-9.0.105\bin
-startup.bat
-shutdown.bat
-http://localhost:8080/WebApp/register.jsp
 
 ## Меняем структуру, для нормальной компиляции
 ```plaintext
@@ -70,3 +66,15 @@ xcopy /y lib\*.jar web\WEB-INF\lib\
 | `description` | Подробное описание объекта                                       |
 | `price`       | Цена, если это товары / платные объекты (`REAL` — дробное число) |
 | `image`       | Путь до изображения (например, `"img/item1.jpg"`)                |
+
+
+##Напоминалка для компиляции 
+javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc-3.49.1.0.jar;lib\javax.servlet-api-4.0.1.jar" src\**\*.java  #в терминале в корне проекта
+
+После компиляции - xcopy /s /y build\* web\WEB-INF\classes\
+
+Перезапустить Tomcat
+cd C:\Users\svint\Desktop\vuzik\apache-tomcat-9.0.105\bin
+startup.bat
+shutdown.bat
+http://localhost:8080/WebApp/register.jsp
