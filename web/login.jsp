@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-
-
 <html>
 <head>
     <title>Вход</title>
@@ -10,7 +8,7 @@
     <h2>Вход</h2>
     <form method="post" action="login">
         <label>Логин:</label>
-        <input type="text" name="login" required><br>
+        <input type="text" name="username" required><br> <!-- исправлено -->
         <label>Пароль:</label>
         <input type="password" name="password" required><br>
         <input type="submit" value="Войти">
