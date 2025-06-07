@@ -68,8 +68,10 @@ xcopy /y lib\*.jar web\WEB-INF\lib\
 | `image`       | Путь до изображения (например, `"img/item1.jpg"`)                |
 
 
-##Напоминалка для компиляции 
-javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc-3.49.1.0.jar;lib\javax.servlet-api-4.0.1.jar" src\**\*.java  #в терминале в корне проекта
+##Напоминалка для компиляции в терминале в корне проекта
+C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar" src\auth\*.java
+
+C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar" src\catalog\*.java  
 
 После компиляции - xcopy /s /y build\* web\WEB-INF\classes\
 

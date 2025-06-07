@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 
 public class CatalogServlet extends HttpServlet {
 
-    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/web/WEB-INF/users.db";
+    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/apache-tomcat-9.0.105/webapps/web/WEB-INF/users.db";
 
     public static class Item {
         public int id;

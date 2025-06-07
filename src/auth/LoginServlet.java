@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 
 public class LoginServlet extends HttpServlet {
 
-    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/web/WEB-INF/users.db";
+    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/apache-tomcat-9.0.105/webapps/web/WEB-INF/users.db";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
