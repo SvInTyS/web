@@ -99,10 +99,10 @@ http://localhost:8080/WebApp/register.jsp
 
 
 ##небольшой фикс, компилируем вот так:
-C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar" src\model\*.java
+javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar" src\model\*.java
 
-C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar;build" src\catalog\*.java
+javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar;build" src\catalog\*.java
 
-C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar;build" src\admin\*.java
+javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar;build" src\admin\*.java
 
-C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar" src\auth\*.java
+javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar" src\auth\*.java
