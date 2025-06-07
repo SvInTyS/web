@@ -6,8 +6,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class AddItemServlet extends HttpServlet {
-    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/apache-tomcat-9.0.105/webapps/web/WEB-INF/users.db";
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -23,13 +21,19 @@ public class AddItemServlet extends HttpServlet {
         double price = Double.parseDouble(request.getParameter("price"));
         String image = request.getParameter("image");
 
+        String dbPath = getServletContext().getRealPath("/WEB-INF/users.db");
+        String DB_URL = "jdbc:sqlite:" + dbPath;
+
         try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement stmt = conn.prepareStatement("INSERT INTO items (name, description, price, image) VALUES (?, ?, ?, ?)")) {
+             PreparedStatement stmt = conn.prepareStatement(
+                     "INSERT INTO items (name, description, price, image) VALUES (?, ?, ?, ?)")) {
+
             stmt.setString(1, name);
             stmt.setString(2, description);
             stmt.setDouble(3, price);
             stmt.setString(4, image);
             stmt.executeUpdate();
+
         } catch (SQLException e) {
             throw new ServletException("Ошибка добавления товара", e);
         }

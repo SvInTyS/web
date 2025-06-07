@@ -70,8 +70,6 @@ xcopy /y lib\*.jar web\WEB-INF\lib\
 ##Подключение header.jsp UI верхушки (Отображает имя, роль, выход, UI)
 <jsp:include page="header.jsp" />
 
-##Админка adminHeader.jsp (Защищает от не-админов)
-Только в admin.jsp, addItem.jsp
 
 
 ##Напоминалка для компиляции в терминале в корне проекта
