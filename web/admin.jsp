@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Item" %> <%-- ← изменено с catalog.CatalogServlet.Item на model.Item --%>
+<jsp:include page="header.jsp" />
+
 
 <%
     String role = (String) session.getAttribute("role");
@@ -9,8 +11,6 @@
         return;
     }
 %>
-
-<jsp:include page="header.jsp" />
 
 <!DOCTYPE html>
 <html>
