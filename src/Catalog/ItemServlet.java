@@ -14,29 +14,43 @@ public class ItemServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String idParam = request.getParameter("id");
+        System.out.println("Получен параметр id: " + idParam);
+
         if (idParam == null || idParam.isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Отсутствует параметр id");
             return;
         }
 
-        int id = Integer.parseInt(idParam);
+        try {
+            int id = Integer.parseInt(idParam);
 
-        try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE id = ?")) {
+            try (Connection conn = DriverManager.getConnection(DB_URL);
+                 PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE id = ?")) {
 
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                request.setAttribute("name", rs.getString("name"));
-                request.setAttribute("description", rs.getString("description"));
-                request.setAttribute("price", rs.getDouble("price"));
-                request.setAttribute("image", rs.getString("image"));
-                request.getRequestDispatcher("item.jsp").forward(request, response);
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Объект не найден");
+                if (rs.next()) {
+                    String name = rs.getString("name");
+                    String desc = rs.getString("description");
+                    double price = rs.getDouble("price");
+                    String image = rs.getString("image");
+
+                    System.out.println("Найден товар: " + name + ", " + price);
+
+                    request.setAttribute("name", name);
+                    request.setAttribute("description", desc);
+                    request.setAttribute("price", price);
+                    request.setAttribute("image", image);
+                    request.getRequestDispatcher("item.jsp").forward(request, response);
+                } else {
+                    System.out.println("Товар с id=" + id + " не найден.");
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Объект не найден");
+                }
+
             }
-
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Некорректный ID");
         } catch (SQLException e) {
             throw new ServletException("Ошибка при загрузке объекта", e);
         }
