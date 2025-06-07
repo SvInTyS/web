@@ -45,6 +45,8 @@ public class EditItemServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8"); // ✅ Ключевая строка
+
         String dbPath = getServletContext().getRealPath("/WEB-INF/users.db");
         String DB_URL = "jdbc:sqlite:" + dbPath;
 

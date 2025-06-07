@@ -2,7 +2,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.Item" %> <%-- ← изменено с catalog.CatalogServlet.Item на model.Item --%>
 <jsp:include page="header.jsp" />
-<link rel="stylesheet" href="style.css">
 
 
 

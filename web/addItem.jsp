@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="header.jsp" />
-<link rel="stylesheet" href="style.css">
-
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +10,7 @@
 </head>
 <body>
     <h2>Добавление нового товара</h2>
-    <form action="addItem" method="post">
+    <form action="addItem" method="post" accept-charset="UTF-8">
         Название: <input type="text" name="name"><br>
         Описание:<br>
         <textarea name="description" rows="4" cols="40"></textarea><br>
