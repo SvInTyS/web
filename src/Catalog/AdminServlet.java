@@ -9,7 +9,8 @@ import javax.servlet.http.*;
 import model.Item;
 
 public class AdminServlet extends HttpServlet {
-    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/apache-tomcat-9.0.105/webapps/web/WEB-INF/users.db";
+    String dbPath = getServletContext().getRealPath("/WEB-INF/users.db");
+    String DB_URL = "jdbc:sqlite:" + dbPath;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -67,5 +67,15 @@
         <url-pattern>/addItem</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>EditItemServlet</servlet-name>
+        <servlet-class>admin.EditItemServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditItemServlet</servlet-name>
+        <url-pattern>/editItem</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

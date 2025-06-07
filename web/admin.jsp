@@ -32,7 +32,7 @@
                 <h3><%= item.getName() %></h3>
                 <p><%= item.getDescription() %></p>
                 <p><strong><%= item.getPrice() %></strong> руб.</p>
-                <a href="editItem.jsp?id=<%= item.getId() %>">✏️ Редактировать</a> |
+                <a href="editItem?id=<%= item.getId() %>">✏️ Редактировать</a> |
                 <a href="deleteItem?id=<%= item.getId() %>" onclick="return confirm('Удалить этот товар?')">🗑️ Удалить</a>
             </div>
 <%
