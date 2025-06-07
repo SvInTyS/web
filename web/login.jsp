@@ -3,6 +3,7 @@
 
 <html>
 <head>
+    <link rel="stylesheet" href="style.css">
     <title>Вход</title>
 </head>
 <body>
