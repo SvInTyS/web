@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("role", role != null ? role : "user");
 
                 System.out.println("Вход выполнен успешно. Роль: " + role);
-                response.sendRedirect("catalog.jsp");
+                response.sendRedirect("catalog");
 
             } else {
                 request.setAttribute("error", "Неверный логин или пароль");
