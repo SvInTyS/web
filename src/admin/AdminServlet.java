@@ -7,6 +7,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import model.Item;
 
 public class AdminServlet extends HttpServlet {
 

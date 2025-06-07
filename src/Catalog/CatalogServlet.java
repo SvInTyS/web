@@ -5,18 +5,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import model.Item;
 
 public class CatalogServlet extends HttpServlet {
 
     private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/apache-tomcat-9.0.105/webapps/web/WEB-INF/users.db";
 
-    public static class Item {
-        public int id;
-        public String name;
-        public String description;
-        public double price;
-        public String image;
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 
+
 public class AddItemServlet extends HttpServlet {
 
     private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/web/WEB-INF/users.db";
