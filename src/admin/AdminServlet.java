@@ -1,28 +1,30 @@
 package admin;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.*;
+import javax.servlet.http.*;
 import model.Item;
 
 public class AdminServlet extends HttpServlet {
-
-    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/web/WEB-INF/users.db";
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession(false);
-        if (session == null || !"admin".equals(session.getAttribute("role"))) {
-            response.sendRedirect("login.jsp");
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
+        if (!"admin".equals(role)) {
+            response.sendRedirect("catalog");
             return;
         }
 
-        ArrayList<Item> items = new ArrayList<>();
+        // Получаем путь к базе данных внутри doGet
+        String dbPath = getServletContext().getRealPath("/WEB-INF/users.db");
+        String DB_URL = "jdbc:sqlite:" + dbPath;
 
+        List<Item> items = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(DB_URL);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM items")) {
