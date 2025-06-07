@@ -9,8 +9,6 @@ import javax.servlet.http.*;
 import model.Item;
 
 public class AdminServlet extends HttpServlet {
-    String dbPath = getServletContext().getRealPath("/WEB-INF/users.db");
-    String DB_URL = "jdbc:sqlite:" + dbPath;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,6 +19,10 @@ public class AdminServlet extends HttpServlet {
             response.sendRedirect("catalog");
             return;
         }
+
+        // 🔧 Перемещаем вызов внутрь метода
+        String dbPath = getServletContext().getRealPath("/WEB-INF/users.db");
+        String DB_URL = "jdbc:sqlite:" + dbPath;
 
         List<Item> items = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(DB_URL);

@@ -17,7 +17,7 @@
             <input type="submit" value="Выйти">
           </form>
     <% } else { %>
-        <span>Вы не авторизованы. <a href="<%=request.getContextPath()%>/login.jsp">Войти</a></span>
+        <span>Вы не авторизованы. <a href="<%=request.getContextPath()%>/login.jsp">Войти</a> или <a href="<%=request.getContextPath()%>/register.jsp">Зарегистрироваться</a></span>
     <% } %>
 </div>
 <hr>
