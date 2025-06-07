@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="header.jsp" />
 <%@ page import="model.Item" %>
+<link rel="stylesheet" href="style.css">
+
 
 <%
     Item item = (Item) request.getAttribute("item");

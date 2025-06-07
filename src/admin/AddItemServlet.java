@@ -1,66 +1,47 @@
 package admin;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
 public class AddItemServlet extends HttpServlet {
 
-    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/web/WEB-INF/users.db";
+    private String DB_URL;
 
-    // Метод GET — открывает страницу добавления товара
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // Защита от неавторизованных пользователей
-        HttpSession session = request.getSession(false);
-        if (session == null || !"admin".equals(session.getAttribute("role"))) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
-        // Перенаправление на форму добавления товара (создай addItem.jsp)
-        request.getRequestDispatcher("addItem.jsp").forward(request, response);
+    public void init() {
+        String path = getServletContext().getRealPath("/WEB-INF/users.db");
+        DB_URL = "jdbc:sqlite:" + path;
     }
 
-    // Метод POST — добавляет товар в базу данных
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8"); // <-- важная строка
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
 
-        HttpSession session = request.getSession(false);
-        if (session == null || !"admin".equals(session.getAttribute("role"))) {
-            response.sendRedirect("login.jsp");
+        if (!"admin".equals(role)) {
+            response.sendRedirect("catalog");
             return;
         }
-
-        request.setCharacterEncoding("UTF-8");
 
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-        String priceStr = request.getParameter("price");
+        double price = Double.parseDouble(request.getParameter("price"));
         String image = request.getParameter("image");
 
-        try {
-            double price = Double.parseDouble(priceStr);
-
-            try (Connection conn = DriverManager.getConnection(DB_URL);
-                 PreparedStatement stmt = conn.prepareStatement(
-                         "INSERT INTO items (name, description, price, image) VALUES (?, ?, ?, ?)")) {
-
-                stmt.setString(1, name);
-                stmt.setString(2, description);
-                stmt.setDouble(3, price);
-                stmt.setString(4, image);
-                stmt.executeUpdate();
-
-                response.sendRedirect("admin");
-            }
-        } catch (NumberFormatException e) {
-            response.getWriter().println("Неверный формат цены.");
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement stmt = conn.prepareStatement("INSERT INTO items (name, description, price, image) VALUES (?, ?, ?, ?)")) {
+            stmt.setString(1, name);
+            stmt.setString(2, description);
+            stmt.setDouble(3, price);
+            stmt.setString(4, image);
+            stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new ServletException("Ошибка при добавлении товара", e);
+            throw new ServletException("Ошибка добавления товара", e);
         }
+
+        response.sendRedirect("admin");
     }
 }

@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<link rel="stylesheet" href="style.css">
+
 <%
     String username = (String) session.getAttribute("username");
     String role = (String) session.getAttribute("role");
