@@ -14,6 +14,12 @@ public class RegisterServlet extends HttpServlet {
     private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/apache-tomcat-9.0.105/webapps/web/WEB-INF/users.db";
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -39,12 +45,14 @@ public class RegisterServlet extends HttpServlet {
                     return;
                 }
 
-                PreparedStatement insertStmt = conn.prepareStatement("INSERT INTO users(username, password) VALUES (?, ?)");
+                PreparedStatement insertStmt = conn.prepareStatement(
+                        "INSERT INTO users(username, password, role) VALUES (?, ?, ?)");
                 insertStmt.setString(1, username);
                 insertStmt.setString(2, password);
+                insertStmt.setString(3, "user"); // 👈 добавлено: роль по умолчанию
 
                 insertStmt.executeUpdate();
-                out.println("Пользователь зарегистрирован!");
+                response.sendRedirect("login.jsp"); // Перенаправление после успешной регистрации
 
             } catch (SQLException e) {
                 out.println("Ошибка базы данных: " + e.getMessage());

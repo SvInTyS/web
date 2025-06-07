@@ -9,6 +9,15 @@ public class LoginServlet extends HttpServlet {
 
     private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/apache-tomcat-9.0.105/webapps/web/WEB-INF/users.db";
 
+    // Метод GET — показывает страницу логина
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Перенаправляем на login.jsp
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+    }
+
+    // Метод POST — обрабатывает авторизацию
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -27,18 +36,14 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                // 1. Создание сессии
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
 
-                // 2. Получаем роль из БД (или по умолчанию "user")
                 String role = rs.getString("role");
                 session.setAttribute("role", role != null ? role : "user");
 
-                // 3. Перенаправляем на каталог или главную
                 response.sendRedirect("catalog.jsp"); // или другой путь
             } else {
-                // Неверные данные
                 response.setContentType("text/html; charset=UTF-8");
                 response.getWriter().println("Неверный логин или пароль. <a href='login.jsp'>Назад</a>");
             }

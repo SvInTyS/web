@@ -5,16 +5,30 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 
-
 public class AddItemServlet extends HttpServlet {
 
     private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/web/WEB-INF/users.db";
 
+    // Метод GET — открывает страницу добавления товара
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Защита от неавторизованных пользователей
+        HttpSession session = request.getSession(false);
+        if (session == null || !"admin".equals(session.getAttribute("role"))) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        // Перенаправление на форму добавления товара (создай addItem.jsp)
+        request.getRequestDispatcher("addItem.jsp").forward(request, response);
+    }
+
+    // Метод POST — добавляет товар в базу данных
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Защита от неадминов
         HttpSession session = request.getSession(false);
         if (session == null || !"admin".equals(session.getAttribute("role"))) {
             response.sendRedirect("login.jsp");
@@ -41,9 +55,7 @@ public class AddItemServlet extends HttpServlet {
                 stmt.setString(4, image);
                 stmt.executeUpdate();
 
-                // После добавления — редирект обратно в админку
                 response.sendRedirect("admin");
-
             }
         } catch (NumberFormatException e) {
             response.getWriter().println("Неверный формат цены.");

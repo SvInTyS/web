@@ -87,3 +87,13 @@ cd C:\Users\svint\Desktop\vuzik\apache-tomcat-9.0.105\bin
 startup.bat
 shutdown.bat
 http://localhost:8080/WebApp/register.jsp
+
+
+##небольшой фикс, компилируем вот так:
+C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar" src\model\*.java
+
+C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar;build" src\catalog\*.java
+
+C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar;build" src\admin\*.java
+
+C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar" src\auth\*.java
