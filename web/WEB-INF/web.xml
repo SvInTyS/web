@@ -19,24 +19,33 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
-    <servlet>
-    <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>auth.LogoutServlet</servlet-class>
-    </servlet>
 
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>auth.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
     <servlet>
-    <servlet-name>CatalogServlet</servlet-name>
-    <servlet-class>catalog.CatalogServlet</servlet-class>
+        <servlet-name>CatalogServlet</servlet-name>
+        <servlet-class>catalog.CatalogServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>CatalogServlet</servlet-name>
         <url-pattern>/catalog</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ItemServlet</servlet-name>
+        <servlet-class>catalog.ItemServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ItemServlet</servlet-name>
+        <url-pattern>/item</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

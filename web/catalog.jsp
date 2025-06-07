@@ -20,7 +20,7 @@
                 <p><%= item.description %></p>
                 <p>Цена: <strong><%= item.price %></strong> руб.</p>
                 <img src="<%= item.image %>" alt="Товар" width="200"><br>
-                <a href="item.jsp?id=<%= item.id %>">Подробнее</a>
+                <a href="item?id=<%= item.id %>">Подробнее</a>
             </div>
 <%
         }
