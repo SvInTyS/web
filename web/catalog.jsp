@@ -18,13 +18,14 @@
     if (items != null) {
         for (Item item : items) {
 %>
-            <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-                <h3><%= item.getName() %></h3>
-                <p><%= item.getDescription() %></p>
-                <p>Цена: <strong><%= item.getPrice() %></strong> руб.</p>
-                <img src="<%= item.getImage() %>" alt="Товар" width="200"><br>
-                <a href="item?id=<%= item.getId() %>">Подробнее</a>
+            <div style="border:1px solid #ccc; padding:10px; margin:10px; width:300px; float:left;">
+                <img src="<%= item.image %>" width="100%" alt="Изображение"><br>
+                <h3><%= item.name %></h3>
+                <p><%= item.description %></p>
+                <p><strong>Цена:</strong> <%= item.price %> руб.</p>
+                <a href="item?id=<%= item.id %>">Подробнее</a>
             </div>
+
 <%
         }
     } else {

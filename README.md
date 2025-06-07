@@ -104,3 +104,5 @@ javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet
 javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar;build" src\admin\*.java
 
 javac -encoding UTF-8 -d build -classpath "lib\sqlite-jdbc.jar;lib\javax.servlet-api-4.0.1.jar" src\auth\*.java
+
+jar -cvf web.war -C web/ .
