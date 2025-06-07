@@ -57,5 +57,15 @@
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AddItemServlet</servlet-name>
+        <servlet-class>admin.AddItemServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddItemServlet</servlet-name>
+        <url-pattern>/addItem</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
