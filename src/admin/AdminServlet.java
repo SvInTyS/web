@@ -29,11 +29,11 @@ public class AdminServlet extends HttpServlet {
 
             while (rs.next()) {
                 Item item = new Item();
-                item.id = rs.getInt("id");
-                item.name = rs.getString("name");
-                item.description = rs.getString("description");
-                item.price = rs.getDouble("price");
-                item.image = rs.getString("image");
+                item.setId(rs.getInt("id"));
+                item.setName(rs.getString("name"));
+                item.setDescription(rs.getString("description"));
+                item.setPrice(rs.getDouble("price"));
+                item.setImage(rs.getString("image"));
                 items.add(item);
             }
 

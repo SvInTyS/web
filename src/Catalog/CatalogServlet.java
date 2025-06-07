@@ -23,13 +23,13 @@ public class CatalogServlet extends HttpServlet {
              ResultSet rs = stmt.executeQuery("SELECT * FROM items")) {
 
             while (rs.next()) {
-                Item item = new Item();
-                item.id = rs.getInt("id");
-                item.name = rs.getString("name");
-                item.description = rs.getString("description");
-                item.price = rs.getDouble("price");
-                item.image = rs.getString("image");
-                items.add(item);
+                    Item item = new Item();
+                    item.setId(rs.getInt("id"));
+                    item.setName(rs.getString("name"));
+                    item.setDescription(rs.getString("description"));
+                    item.setPrice(rs.getDouble("price"));
+                    item.setImage(rs.getString("image"));
+                    items.add(item);
             }
 
         } catch (SQLException e) {
