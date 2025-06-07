@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List, model.Item" %>
-<%@ page import="catalog.CatalogServlet.Item" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,11 +16,11 @@
         for (Item item : items) {
 %>
             <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-                <h3><%= item.name %></h3>
-                <p><%= item.description %></p>
-                <p>Цена: <strong><%= item.price %></strong> руб.</p>
-                <img src="<%= item.image %>" alt="Товар" width="200"><br>
-                <a href="item?id=<%= item.id %>">Подробнее</a>
+                <h3><%= item.getName() %></h3>
+                <p><%= item.getDescription() %></p>
+                <p>Цена: <strong><%= item.getPrice() %></strong> руб.</p>
+                <img src="<%= item.getImage() %>" alt="Товар" width="200"><br>
+                <a href="item?id=<%= item.getId() %>">Подробнее</a>
             </div>
 <%
         }
