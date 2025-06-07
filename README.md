@@ -67,6 +67,12 @@ xcopy /y lib\*.jar web\WEB-INF\lib\
 | `price`       | Цена, если это товары / платные объекты (`REAL` — дробное число) |
 | `image`       | Путь до изображения (например, `"img/item1.jpg"`)                |
 
+##Подключение header.jsp UI верхушки (Отображает имя, роль, выход, UI)
+<jsp:include page="header.jsp" />
+
+##Админка adminHeader.jsp (Защищает от не-админов)
+Только в admin.jsp, addItem.jsp
+
 
 ##Напоминалка для компиляции в терминале в корне проекта
 C:\Users\svint\Desktop\vuzik\1kursmaga\2sem\web>

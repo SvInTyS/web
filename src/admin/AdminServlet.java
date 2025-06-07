@@ -1,0 +1,48 @@
+package admin;
+
+import catalog.CatalogServlet.Item;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
+
+public class AdminServlet extends HttpServlet {
+
+    private static final String DB_URL = "jdbc:sqlite:C:/Users/svint/Desktop/vuzik/web/WEB-INF/users.db";
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession(false);
+        if (session == null || !"admin".equals(session.getAttribute("role"))) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        ArrayList<Item> items = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM items")) {
+
+            while (rs.next()) {
+                Item item = new Item();
+                item.id = rs.getInt("id");
+                item.name = rs.getString("name");
+                item.description = rs.getString("description");
+                item.price = rs.getDouble("price");
+                item.image = rs.getString("image");
+                items.add(item);
+            }
+
+        } catch (SQLException e) {
+            throw new ServletException("Ошибка БД", e);
+        }
+
+        request.setAttribute("items", items);
+        request.getRequestDispatcher("admin.jsp").forward(request, response);
+    }
+}
